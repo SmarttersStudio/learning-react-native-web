@@ -1,13 +1,15 @@
 import React from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
 } from 'react-native';
+import {Provider as PaperProvider} from 'react-native-paper';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 // import {
 //   Colors,
@@ -18,101 +20,104 @@ import {
 // } from 'react-native/Libraries/NewAppScreen';
 
 const Colors = {
-    white: '#fff',
-    black: '#000',
-    light: '#ddd',
-    dark: '#333',
-    lighter: '#eee',
-    darker: '#111',
+  white: '#fff',
+  black: '#000',
+  light: '#ddd',
+  dark: '#333',
+  lighter: '#eee',
+  darker: '#111',
 };
 
-const Section = ({children, title}) => {
-    const isDarkMode = useColorScheme() === 'dark';
-    return (
-        <View style={styles.sectionContainer}>
-            <Text
-                style={[
-                    styles.sectionTitle,
-                    {
-                        color: isDarkMode ? Colors.white : Colors.black,
-                    },
-                ]}>
-                {title}
-            </Text>
-            <Text
-                style={[
-                    styles.sectionDescription,
-                    {
-                        color: isDarkMode ? Colors.light : Colors.dark,
-                    },
-                ]}>
-                {children}
-            </Text>
-        </View>
-    );
+const Section = ({children, title}: any) => {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
 };
 
 const App = () => {
-    const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'dark';
 
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
-    return (
-        <SafeAreaView style={backgroundStyle}>
-            <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}/>
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-                style={backgroundStyle}>
-                {/* <Header /> */}
-                <View
-                    style={{
-                        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-                    }}>
-                    <Section title="This is my react native app">
-                        <Text style={styles.highlight}>For Android, iOS & Web!!!</Text>
-                    </Section>
+  return (
+    <PaperProvider
+      settings={{
+        icon: props => <AwesomeIcon {...props} />,
+      }}>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={backgroundStyle}>
+          {/*<Header /> */}
+          <View
+            style={{
+              backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            }}>
+            <Section title="This is my react native app">
+              <Text style={styles.highlight}>For Android, iOS & Web!!!</Text>
+            </Section>
 
-                    <Section>
-
-                    </Section>
-                    {/*<Section title="See Your Changes">*/}
-                    {/*  /!* <ReloadInstructions /> *!/*/}
-                    {/*  <Text>Reload Instruction</Text>*/}
-                    {/*</Section>*/}
-                    {/*<Section title="Debug">*/}
-                    {/*  /!* <DebugInstructions /> *!/*/}
-                    {/*  <Text>Debug Instruction</Text>*/}
-                    {/*</Section>*/}
-                    {/*<Section title="Learn More">*/}
-                    {/*  Read the docs to discover what to do next:*/}
-                    {/*</Section>*/}
-                    {/* <LearnMoreLinks /> */}
-                    {/*<Text>Learn More Links</Text>*/}
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-    );
+            <Section />
+            {/*<Section title="See Your Changes">*/}
+            {/*  /!* <ReloadInstructions /> *!/*/}
+            {/*  <Text>Reload Instruction</Text>*/}
+            {/*</Section>*/}
+            {/*<Section title="Debug">*/}
+            {/*  /!* <DebugInstructions /> *!/*/}
+            {/*  <Text>Debug Instruction</Text>*/}
+            {/*</Section>*/}
+            {/*<Section title="Learn More">*/}
+            {/*  Read the docs to discover what to do next:*/}
+            {/*</Section>*/}
+            {/* <LearnMoreLinks /> */}
+            {/*<Text>Learn More Links</Text>*/}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </PaperProvider>
+  );
 };
 
 const styles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '700',
-    },
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
 });
 
 export default App;
