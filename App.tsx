@@ -1,123 +1,79 @@
 import React from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {Provider as PaperProvider} from 'react-native-paper';
+  Appbar,
+  Avatar,
+  Button,
+  Card,
+  FAB,
+  Paragraph,
+  Provider as PaperProvider,
+  Title,
+} from 'react-native-paper';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-// import {
-//   Colors,
-//   DebugInstructions,
-//   Header,
-//   LearnMoreLinks,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
-
-const Colors = {
-  white: '#fff',
-  black: '#000',
-  light: '#ddd',
-  dark: '#333',
-  lighter: '#eee',
-  darker: '#111',
-};
-
-const Section = ({children, title}: any) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <PaperProvider
       settings={{
         icon: props => <AwesomeIcon {...props} />,
       }}>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
-          {/*<Header /> */}
-          <View
-            style={{
-              backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            }}>
-            <Section title="This is my react native app">
-              <Text style={styles.highlight}>For Android, iOS & Web!!!</Text>
-            </Section>
+      <SafeAreaView style={styles.mainContainer}>
+        <Appbar.Header
+          style={{
+            backgroundColor: '#0017ff',
+          }}>
+          <Appbar.BackAction />
+          <Appbar.Content title={'Title'} subtitle={'Subtitle'} />
+          <Appbar.Action icon={'search'} />
+        </Appbar.Header>
 
-            <Section />
-            {/*<Section title="See Your Changes">*/}
-            {/*  /!* <ReloadInstructions /> *!/*/}
-            {/*  <Text>Reload Instruction</Text>*/}
-            {/*</Section>*/}
-            {/*<Section title="Debug">*/}
-            {/*  /!* <DebugInstructions /> *!/*/}
-            {/*  <Text>Debug Instruction</Text>*/}
-            {/*</Section>*/}
-            {/*<Section title="Learn More">*/}
-            {/*  Read the docs to discover what to do next:*/}
-            {/*</Section>*/}
-            {/* <LearnMoreLinks /> */}
-            {/*<Text>Learn More Links</Text>*/}
-          </View>
-        </ScrollView>
+        <PostCard />
       </SafeAreaView>
     </PaperProvider>
   );
 };
-
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  mainContainer: {
+    flex: 1,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  outer: {
+    flex: 1,
   },
-  highlight: {
-    fontWeight: '700',
+  inner: {
+    flex: 1,
   },
 });
+const LeftContent = (props: any) => <Avatar.Icon icon={'folder'} {...props} />;
+const PostCard = () => (
+  <Card
+    style={{
+      margin: 10,
+    }}>
+    <Card.Title title={'Title'} subtitle={'Subtitle'} left={LeftContent} />
+    <Card.Content>
+      <Title>Title</Title>
+      <Paragraph>Description</Paragraph>
+    </Card.Content>
+    <Card.Cover
+      style={{
+        margin: 10,
+      }}
+      source={{
+        uri: 'https://fastly.picsum.photos/id/923/536/354.jpg?hmac=N40itV6JyPJOXi8egJdNP0fXRteuorTKOitNJ2hfVxw',
+      }}
+    />
+    <Card.Actions>
+      <Button>Cancel</Button>
+      <Button>Ok</Button>
+    </Card.Actions>
+  </Card>
+);
 
 export default App;
